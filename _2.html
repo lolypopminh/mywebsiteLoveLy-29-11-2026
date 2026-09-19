@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
+<meta name="theme-color" content="#ffd9e8">
+<title>งอลอ่าาา 😖🥺🥺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Mali','Noto Sans Thai',sans-serif;
+    min-height:100vh;
+    min-height:100dvh;
+    background:linear-gradient(135deg,#ffd9e8,#e0d4ff,#d4f1ff);
+    background-size:400% 400%;
+    animation:bg 14s ease infinite;
+    display:flex;align-items:center;justify-content:center;
+    padding:calc(16px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom));
+    overflow:hidden;
+    -webkit-user-select:none;user-select:none;
+  }
+  @keyframes bg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+  .card{
+    background:rgba(255,255,255,.85);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    border-radius:clamp(20px,5vw,28px);
+    padding:clamp(24px,6vw,36px) clamp(18px,5vw,28px);
+    width:100%;max-width:460px;
+    box-shadow:0 18px 50px rgba(190,120,170,.3);
+    text-align:center;position:relative;z-index:2;
+  }
+  .face{
+    font-size:clamp(60px,18vw,88px);line-height:1;display:inline-block;
+    animation:pout 2s ease-in-out infinite;
+  }
+  @keyframes pout{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) scale(1.06)}}
+  h1{font-size:clamp(20px,5.5vw,26px);color:#c2185b;margin:10px 0 4px;line-height:1.4}
+  .msg{
+    font-size:clamp(15px,4vw,18px);color:#6b4a63;
+    min-height:clamp(64px,18vw,80px);
+    display:flex;align-items:center;justify-content:center;
+    padding:8px 4px;line-height:1.5;
+  }
+
+  .meter{margin:12px 0 20px}
+  .meter-label{display:flex;justify-content:space-between;font-size:clamp(12px,3.4vw,14px);color:#8a6b83;margin-bottom:6px}
+  .bar{height:16px;background:#f2e2ee;border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#ff8fb1,#ff4d7e);transition:width .5s cubic-bezier(.3,1.4,.5,1),background .5s}
+
+  .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  button{
+    font-family:inherit;font-size:clamp(15px,4vw,16px);font-weight:600;
+    padding:14px clamp(18px,5vw,24px);
+    min-height:48px;
+    border:none;border-radius:99px;cursor:pointer;
+    touch-action:manipulation;
+    transition:transform .15s,box-shadow .2s,background .3s;
+  }
+  button:active{transform:scale(.94)}
+  .sorry{background:linear-gradient(135deg,#ff6b9d,#c2185b);color:#fff;box-shadow:0 6px 18px rgba(194,24,91,.35)}
+  @media(hover:hover){.sorry:hover{transform:translateY(-2px)}}
+  .no{background:#fff;color:#9c7a94;border:2px solid #e8cfe2;z-index:5}
+  .again{background:#fff;color:#7a9c8c;border:2px solid #cfe8dd;display:none;margin-top:14px}
+
+  .hint{font-size:clamp(12px,3.4vw,13px);color:#a98fa4;margin-top:14px;min-height:20px;line-height:1.5}
+
+  .heart{position:fixed;font-size:clamp(20px,6vw,26px);pointer-events:none;z-index:1;will-change:transform,opacity;animation:fly 2.6s ease-out forwards}
+  @keyframes fly{
+    0%{transform:translateY(0) scale(.4);opacity:1}
+    100%{transform:translateY(-110vh) scale(1.3) rotate(40deg);opacity:0}
+  }
+  .shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="face" id="face">🥺🥺😭</div>
+  <h1 id="title">งอลอยู่ อย่ามายุ่ง</h1>
+  <div class="msg" id="msg">ไม่คุยด้วย ไปคุยกับเกมที่เล่นเมื่อคืนนู่น 🎮</div>
+
+  <div class="meter">
+    <div class="meter-label"><span>ระดับความงอล</span><span id="pct">100%</span></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+  </div>
+
+  <div class="btns">
+    <button class="sorry" id="sorry" type="button">ขอโทษนะ 🥺</button>
+    <button class="no" id="no" type="button">ไม่ขอโทษ 😏</button>
+  </div>
+  <button class="again" id="again" type="button">งอลใหม่อีกรอบ 🔁</button>
+  <div class="hint" id="hint">กดขอโทษรัวๆ สิ เผื่อใจจะอ่อน</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var messages = [
+    {f:"😣", t:"งอลอยู่ อย่ามายุ่ง",  m:"ไม่คุยด้วย ไปคุยกับเกมที่เล่นเมื่อคืนนู่น 🎮"},
+    {f:"🙄", t:"ขอโทษแค่นี้เหรอ",     m:"พิมพ์มาแค่นี้ ใจไม่ถึงครึ่งดวงเลยนะ"},
+    {f:"😒", t:"อืม... ฟังอยู่",       m:"อ่านข้อความเมื่อคืน 4 ชม. ค่อยตอบ จำได้มั้ย"},
+    {f:"😕", t:"ก็ยังงอลอยู่นะ",       m:"แต่...เสียงขอโทษก็เพราะดีอยู่ พูดอีกทีซิ"},
+    {f:"😔", t:"ใจเริ่มอ่อนแล้ว",      m:"อย่านึกว่าจะง่ายนะ แต่ก็...เกือบแล้วแหละ"},
+    {f:"🥹", t:"ก็ได้ๆ",              m:"หยุดทำหน้าแบบนั้นสิ เดี๋ยวใจอ่อนหมดพอดี"},
+    {f:"🥰", t:"ให้อภัยแล้ว!",         m:"ครั้งนี้ครั้งเดียวนะ! ...แต่ครั้งหน้าก็คงให้อภัยอีกอยู่ดี 💕"}
+  ];
+  var excusesMouse = ["ไม่ได้ ปุ่มนี้เสีย 🔧","ลองอีกทีสิ (ไม่ได้อยู่ดี)","กดได้แต่ใจฉันไม่ได้","อุ๊ย ปุ่มหนีเอง ไม่ใช่ฉัน","ยอมแพ้เถอะ ปุ่มนี้ไม่มีวันชนะ"];
+  var excusesTouch = ["นิ้วไวนะ แต่ปุ่มไวกว่า 💨","จิ้มไม่โดนหรอก เลิกพยายามเถอะ","ปุ่มนี้ออกกำลังกายมาทั้งปี","จิ้มอีกก็หนีอีก 😌","กดขอโทษง่ายกว่าเยอะนะ"];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var face=$("face"), title=$("title"), msg=$("msg"), fill=$("fill"),
+      pct=$("pct"), hint=$("hint"), card=$("card"),
+      sorryBtn=$("sorry"), noBtn=$("no"), againBtn=$("again");
+
+  var step = 0, escapes = 0, done = false;
+  var isCoarse = window.matchMedia("(pointer:coarse)").matches;
+  var heartBurst = isCoarse ? 14 : 30;
+
+  function render(){
+    var s = messages[step];
+    face.textContent = s.f;
+    title.textContent = s.t;
+    msg.textContent = s.m;
+    var level = Math.round(100 - (step/(messages.length-1))*100);
+    fill.style.width = level + "%";
+    pct.textContent = level + "%";
+  }
+
+  function popHeart(x,y){
+    var h = document.createElement("div");
+    h.className = "heart";
+    var e = ["💖","💕","💗","🌸","✨"];
+    h.textContent = e[Math.floor(Math.random()*e.length)];
+    h.style.left = (x-15) + "px";
+    h.style.top  = (y-15) + "px";
+    document.body.appendChild(h);
+    setTimeout(function(){ h.remove(); }, 2700);
+  }
+
+  function pointFrom(ev, el){
+    if(ev && typeof ev.clientX === "number" && (ev.clientX || ev.clientY)){
+      return {x:ev.clientX, y:ev.clientY};
+    }
+    var r = el.getBoundingClientRect();
+    return {x:r.left + r.width/2, y:r.top + r.height/2};
+  }
+
+  function finish(){
+    done = true;
+    hint.textContent = "ขอบคุณที่ไม่ยอมแพ้นะ 💗รักนะค่ะแฟนเค้า (ถึง ->ผ้าไหม)";
+    noBtn.style.display = "none";
+    againBtn.style.display = "inline-block";
+    fill.style.background = "linear-gradient(90deg,#7ee8a2,#42c97a)";
+    var vw = window.innerWidth, vh = window.innerHeight;
+    for(var i=0;i<heartBurst;i++){
+      (function(i){
+        setTimeout(function(){ popHeart(Math.random()*vw, vh-40); }, i*90);
+      })(i);
+    }
+    if(navigator.vibrate){ navigator.vibrate([40,60,40]); }
+  }
+
+  sorryBtn.addEventListener("click", function(ev){
+    if(step < messages.length-1) step++;
+    render();
+    var p = pointFrom(ev, sorryBtn);
+    popHeart(p.x, p.y);
+    if(step === messages.length-1 && !done) finish();
+  });
+
+  // ---- ปุ่มหนี: รองรับทั้งเมาส์และนิ้ว ----
+  function escape(touch){
+    escapes++;
+    var r = noBtn.getBoundingClientRect();
+    var w = r.width, h = r.height, pad = 8;
+    var maxX = Math.max(pad, window.innerWidth  - w - pad);
+    var maxY = Math.max(pad, window.innerHeight - h - pad);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = (pad + Math.random()*(maxX-pad)) + "px";
+    noBtn.style.top  = (pad + Math.random()*(maxY-pad)) + "px";
+    var list = touch ? excusesTouch : excusesMouse;
+    hint.textContent = list[escapes % list.length];
+    card.classList.add("shake");
+    setTimeout(function(){ card.classList.remove("shake"); }, 400);
+    if(escapes === 6){ hint.textContent = "เหนื่อยยัง? กดขอโทษดีกว่านะ 😌"; }
+  }
+
+  noBtn.addEventListener("pointerenter", function(ev){
+    if(ev.pointerType === "mouse") escape(false);
+  });
+  noBtn.addEventListener("pointerdown", function(ev){
+    if(ev.pointerType !== "mouse"){ ev.preventDefault(); escape(true); }
+  });
+  // กันเบราว์เซอร์เก่าที่ไม่รองรับ Pointer Events
+  if(!window.PointerEvent){
+    noBtn.addEventListener("mouseover", function(){ escape(false); });
+    noBtn.addEventListener("touchstart", function(ev){ ev.preventDefault(); escape(true); }, {passive:false});
+  }
+  noBtn.addEventListener("click", function(ev){
+    ev.preventDefault();
+    hint.textContent = "โกงนี่หว่า! 😡 กดขอโทษอย่างเดียว";
+  });
+
+  againBtn.addEventListener("click", function(){
+    step = 0; escapes = 0; done = false;
+    render();
+    fill.style.background = "linear-gradient(90deg,#ff8fb1,#ff4d7e)";
+    hint.textContent = "กดขอโทษรัวๆ สิ เผื่อใจจะอ่อน";
+    againBtn.style.display = "none";
+    noBtn.style.position = "static";
+    noBtn.style.display = "inline-block";
+  });
+
+  // ปุ่มหนีไม่ให้ค้างนอกจอเวลาหมุนจอ / ย่อขยายหน้าต่าง
+  window.addEventListener("resize", function(){
+    if(noBtn.style.position !== "fixed") return;
+    var r = noBtn.getBoundingClientRect(), pad = 8;
+    var maxX = window.innerWidth  - r.width  - pad;
+    var maxY = window.innerHeight - r.height - pad;
+    noBtn.style.left = Math.min(Math.max(pad, r.left), Math.max(pad,maxX)) + "px";
+    noBtn.style.top  = Math.min(Math.max(pad, r.top),  Math.max(pad,maxY)) + "px";
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
