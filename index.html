@@ -1,283 +1,147 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#fff0f5">
-<title>ขอโทษนะ... ง้ออยู่ 🌹</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Mali','Noto Sans Thai',sans-serif;
-    background:linear-gradient(160deg,#fff0f5,#ffe8f0,#f3e9ff,#e9f4ff);
-    background-size:300% 300%;
-    animation:bg 18s ease infinite;
-    color:#5c4159;
-    padding:calc(20px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom));
-    overflow-x:hidden;
-  }
-  @keyframes bg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
-  .wrap{max-width:520px;margin:0 auto}
-  .card{
-    background:rgba(255,255,255,.88);
-    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-    border-radius:clamp(20px,5vw,26px);
-    padding:clamp(22px,6vw,32px) clamp(18px,5vw,28px);
-    box-shadow:0 14px 40px rgba(200,140,180,.22);
-    margin-bottom:18px;
-    position:relative;z-index:2;
-  }
-  .hero{text-align:center}
-  .rose{font-size:clamp(64px,20vw,96px);display:inline-block;animation:sway 3s ease-in-out infinite}
-  @keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-  h1{font-size:clamp(22px,6vw,30px);color:#c2185b;margin:10px 0 8px;line-height:1.4}
-  h2{font-size:clamp(17px,4.6vw,20px);color:#b03a72;margin-bottom:12px}
-  .sub{font-size:clamp(14px,3.9vw,16px);color:#8a6b83;line-height:1.7}
-
-  /* จดหมายพิมพ์ทีละตัว */
-  .letter{
-    background:#fffdf7;border:1px dashed #f0cfe0;border-radius:18px;
-    padding:clamp(16px,4.5vw,22px);
-    font-size:clamp(15px,4vw,17px);line-height:1.9;
-    min-height:190px;white-space:pre-wrap;color:#6b4a63;
-  }
-  .cursor{display:inline-block;width:2px;height:1em;background:#c2185b;vertical-align:-2px;animation:blink .8s steps(2) infinite}
-  @keyframes blink{50%{opacity:0}}
-
-  /* คูปอง */
-  .coupons{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-  .coupon{
-    background:linear-gradient(135deg,#fff,#fff6fa);
-    border:2px dashed #f2b8d0;border-radius:14px;
-    padding:14px 12px;text-align:center;cursor:pointer;
-    font-size:clamp(13px,3.6vw,14px);line-height:1.5;
-    transition:transform .18s,background .25s,border-color .25s;
-    touch-action:manipulation;
-  }
-  .coupon:active{transform:scale(.95)}
-  @media(hover:hover){.coupon:hover{transform:translateY(-3px);border-color:#ff6b9d}}
-  .coupon.used{background:#f0f7f2;border-color:#9ad9b5;color:#4f8a6b;text-decoration:line-through;opacity:.85}
-  .coupon .ic{font-size:26px;display:block;margin-bottom:6px}
-
-  /* เหตุผล */
-  .reason{
-    background:#fff6fa;border-radius:14px;padding:16px;
-    font-size:clamp(15px,4vw,17px);line-height:1.7;min-height:80px;
-    display:flex;align-items:center;justify-content:center;text-align:center;color:#8a4a72;
-  }
-
-  /* ปุ่ม */
-  .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-  button{
-    font-family:inherit;font-weight:600;font-size:clamp(15px,4vw,16px);
-    padding:14px 22px;min-height:48px;border:none;border-radius:99px;
-    cursor:pointer;touch-action:manipulation;
-    transition:transform .15s,box-shadow .2s;
-  }
-  button:active{transform:scale(.94)}
-  .primary{background:linear-gradient(135deg,#ff6b9d,#c2185b);color:#fff;box-shadow:0 6px 18px rgba(194,24,91,.32)}
-  .ghost{background:#fff;color:#9c7a94;border:2px solid #f0d5e5}
-  .forgive{background:linear-gradient(135deg,#7ee8a2,#3fb977);color:#fff;box-shadow:0 6px 18px rgba(63,185,119,.3);font-size:clamp(16px,4.4vw,18px);padding:16px 30px}
-
-  .hint{font-size:clamp(12px,3.4vw,13px);color:#a98fa4;text-align:center;margin-top:12px;line-height:1.6;min-height:20px}
-
-  /* ผลลัพธ์ */
-  #result{display:none;text-align:center}
-  #result.show{display:block;animation:pop .5s cubic-bezier(.3,1.5,.5,1)}
-  @keyframes pop{0%{transform:scale(.8);opacity:0}100%{transform:scale(1);opacity:1}}
-
-  .petal{position:fixed;top:-40px;pointer-events:none;z-index:1;will-change:transform;animation:fall linear forwards}
-  @keyframes fall{to{transform:translateY(112vh) rotate(420deg);opacity:.1}}
-  .burst{position:fixed;pointer-events:none;z-index:3;font-size:clamp(20px,6vw,26px);animation:up 2.4s ease-out forwards}
-  @keyframes up{0%{transform:translateY(0) scale(.4);opacity:1}100%{transform:translateY(-100vh) scale(1.3) rotate(35deg);opacity:0}}
-
-  @media (prefers-reduced-motion:reduce){
-    *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Favorite Person</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Itim&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="wrap">
+  <div class="hearts-container" id="heartsContainer"></div>
 
-  <div class="card hero">
-    <div class="rose">🌹</div>
-    <h1 id="headline">ขอโทษนะ... ง้ออยู่ตรงนี้</h1>
-    <p class="sub">ไม่ได้มาแก้ตัว มาแก้ไขจริงๆ<br>อ่านให้จบก่อนได้มั้ย แค่นี้เอง 🥺</p>
-  </div>
+  <nav class="navbar">
+    <a href="#home" class="logo">♥ Our Story</a>
+    <a href="#letter" class="nav-link">จดหมายถึงเธอ</a>
+  </nav>
 
-  <div class="card">
-    <h2>📜 จดหมายจากคนผิด</h2>
-    <div class="letter" id="letter"><span class="cursor">เค้าผิดเองค้าบ อย่างอนเลย อย่าไปหาใครเลยนะค่ะ</span>
-    <span class="cursor">เข้ามีแค่เธอคนเดี่ยวแก่ผ้าไหม</span></div>
-    <div class="btns">
-      <button class="ghost" id="skip" type="button">ข้ามไปเลย ⏭</button>
-      <button class="ghost" id="replay" type="button">อ่านอีกรอบ 🔁</button>
-    </div>
-  </div>
+  <main>
+    <section class="hero" id="home">
+      <p class="eyebrow">💟💟HAPPY ANNIVERSARY BABE💟💟</p>
 
-  <div class="card">
-    <h2>🎟️ คูปองไถ่โทษ — กดเลือกได้เลย</h2>
-    <p class="sub" style="margin-bottom:12px">ใช้ได้ไม่มีวันหมดอายุ ไม่มีเงื่อนไขแอบแฝง</p>
-    <div class="coupons" id="coupons"></div>
-    <div class="hint" id="couponHint">เลือกมาสักใบสิ ยังไม่ได้ใช้สักใบเลย</div>
-  </div>
+      <!-- TODO: เปลี่ยนชื่อแฟนตรงนี้ -->
+      <h1>ถึง <span class="highlight">💗คนพิเศษของเรา💗</span></h1>
 
-  <!-- <div class="card">
-    <h2>💬 ทำไมถึงง้อไม่เลิก</h2>
-    <div class="reason" id="reason">กดปุ่มข้างล่างสิ มีเหตุผลเยอะมาก</div>
-    <div class="btns"><button class="primary" id="reasonBtn" type="button">บอกมาอีกข้อ 💕</button></div>
-  </div> -->
+      <!-- TODO: แก้ข้อความสั้น ๆ ใต้ชื่อได้ตามต้องการ -->
+      <p class="hero-text">
+        ขอบคุณนะผ้าไหม้ที่เข้ามาเป็นส่วนหนั่งของชีวิตและหัวใจเค้า เป็นความสบายใจ
+        และเป็นเรื่องราวที่ดีที่สุดของเรา ตั้งแต่เจอเธอก็ได้ทำให้รู้ว่ารักที่แท้จริงมีอยู๋จริง จากหมาด็ก🤭
+        ปล. รักที่สุด💗
+      </p>
 
-  <div class="card" style="text-align:center" id="finalCard">
-    <h2>พร้อมจะยกโทษให้รึยัง?</h2>
-    <p class="sub">ไม่ต้องรีบนะ แต่ถ้าพร้อมแล้ว...</p>
-    <div class="btns"><button class="forgive" id="forgive" type="button">ยกโทษให้ 💚</button></div>
-    <div class="hint" id="finalHint">(ถ้ายังไม่พร้อม ปิดไปก่อนก็ได้ เดี๋ยวรอ)</div>
-  </div>
+      <div class="anniversary-card">
+        <p>เราเดินทางมาด้วยกันแล้ว</p>
 
-  <div class="card" id="result">
-    <div class="rose">🥰</div>
-    <h1>ขอบคุณที่ยังใจดีกับเราเสมอ</h1>
-    <p class="sub">สัญญาว่าจะทำให้ดีกว่าเดิม<br>ไม่ใช่แค่พูด แต่จะทำให้เห็น 💖</p>
-    <div class="btns"><button class="ghost" id="restart" type="button">เริ่มใหม่ 🔁</button></div>
-  </div>
+        <!-- TODO: JavaScript จะคำนวณจำนวนวันจากตัวแปร anniversaryDate ใน script.js -->
+        <strong id="daysTogether">30</strong>
+        <span>Days💗</span>
+      </div>
 
-</div>
+      <a href="#letter" class="button">เปิดข้อความจากเรานะ💌 <span>♡</span></a>
+    </section>
 
-<script>
-(function(){
-  "use strict";
-  var $=function(i){return document.getElementById(i)};
-  var isCoarse = matchMedia("(pointer:coarse)").matches;
+    <section class="memory-section">
+      <div class="section-title">
+        <p>OUR LITTLE MEMORIES</p>
+        <h2>ทุกช่วงเวลามีความหมาย เพราะมีเธออยู่ในนั้น ไม่ว่าจะสุขหรือเศร้าเธอก็อยู่ข้างเราสเมอเลยนะ
+           ขอบคุณสำหรับทุกความเข้าใจ💝</h2>
+      </div>
 
-  /* ---------- จดหมาย ---------- */
-  var text =
-"ถึงคนที่กำลังงอลอยู่,\n\n"+
-"เรารู้ว่าเราผิด และรู้ด้วยว่าคำว่าขอโทษคำเดียวมันไม่พอ\n\n"+
-"ที่เงียบไป ไม่ใช่ไม่แคร์ แต่กลัวพูดแล้วยิ่งพัง\n"+
-"สุดท้ายก็พังอยู่ดีเพราะไม่พูด... โง่จริงๆ\n\n"+
-"ไม่ได้อยากชนะในเรื่องที่ทะเลาะกัน\n"+
-"อยากชนะใจกลับมามากกว่า\n\n"+
-"ให้เวลาเราแก้ตัวอีกสักครั้งได้มั้ย 🥺";
+      <div class="memory-grid">
+        <article class="memory-card">
+          <!-- TODO: เปลี่ยนลิงก์รูปเป็นรูปของคุณเอง เช่น images/photo1.jpg -->
+          <img src="Unico.JPG" alt="ความทรงจำของเรา">
+          <div class="memory-content">
+            <!-- TODO: ใส่วันที่หรือชื่อโมเมนต์แรก -->
+            <p class="memory-date">วันแรกที่เราเจอกัน</p>
+            <!-- TODO: เขียนความทรงจำรูปที่ 1 -->
+            <h3>จุดเริ่มต้นของเรื่องราว</h3>
+            <p>จากวันธรรมดาวันหนึ่ง กลายเป็นวันที่เราไม่อยากลืมเลย จนถึงทุกวันนี้มองว่าเธอสวยที่สุดไม่มีใครสู้ได้เลย</p>
+          </div>
+        </article>
 
-  var letter=$("letter"), i=0, timer=null;
-  function type(){
-    clearInterval(timer); i=0; letter.innerHTML='<span class="cursor"></span>';
-    timer=setInterval(function(){
-      i++;
-      letter.innerHTML = text.slice(0,i).replace(/</g,"&lt;") + '<span class="cursor"></span>';
-      if(i>=text.length) clearInterval(timer);
-    }, 38);
-  }
-  function showAll(){ clearInterval(timer); i=text.length; letter.textContent=text; }
-  $("skip").addEventListener("click",showAll);
-  $("replay").addEventListener("click",type);
+        <article class="memory-card">
+          <!-- TODO: เปลี่ยนลิงก์รูปเป็นรูปของคุณเอง -->
+          <img src="smile.jpg">
+          <div class="memory-content">
+            <!-- TODO: เขียนวันที่หรือชื่อโมเมนต์รูปที่ 2 -->
+            <p class="memory-date">ช่วงเวลาที่ดีที่สุด</p>
+            <!-- TODO: เขียนความทรงจำรูปที่ 2 -->
+            <h3>รอยยิ้มของเธอน่ารักกว่าใครทั้งนั้น💗</h3>
+            <p>เป็นสิ่งที่ทำให้วันเหนื่อย ๆ ของเราดีขึ้นเสมอ❤️‍🩹</p>
+          </div>
+        </article>
 
-  /* ---------- คูปอง ---------- */
-  var coupons=[
-    {ic:"🎬",t:"ดูหนังที่เธอเลือก ไม่บ่นสักคำ"},
-    {ic:"👂",t:"ฟังเธอบ่นได้ไม่จำกัดเวลา"},
-    {ic:"🍰",t:"ของหวานตามใจ ไม่ห้ามเรื่องแคลอรี่"},
-    {ic:"🤗",t:"กอดไม่อั้น ใช้ได้ตลอดชีวิต"}
-  ];
-  var box=$("coupons"), used=0, cHint=$("couponHint");
-  coupons.forEach(function(c){
-    var d=document.createElement("div");
-    d.className="coupon";
-    d.innerHTML='<span class="ic">'+c.ic+'</span>'+c.t;
-    d.addEventListener("click",function(){
-      if(d.classList.contains("used")) return;
-      d.classList.add("used"); used++;
-      burstAt(d, 6);
-      if(navigator.vibrate) navigator.vibrate(30);
-      if(used===coupons.length) cHint.textContent="ใช้หมดทุกใบเลย!! เดี๋ยวพิมพ์ใหม่ให้อีกเป็นปึกก็ได้ 😭";
-      else cHint.textContent="ใช้ไปแล้ว "+used+"/"+coupons.length+" ใบ — เหลืออีกเยอะ เอาไปเลย";
-    });
-    box.appendChild(d);
-  });
+        <article class="memory-card">
+          <!-- TODO: เปลี่ยนลิงก์รูปเป็นรูปของคุณเอง -->
+          <img src="./ourFirstPhotoBooth.jpg" alt="ความทรงจำของเรา">
+          <div class="memory-content">
+            <!-- TODO: เขียนวันที่หรือชื่อโมเมนต์รูปที่ 3 -->
+            <p class="memory-date">และอีกหลายวันต่อจากนี้</p>
+            <!-- TODO: เขียนความทรงจำรูปที่ 3 -->
+            <h3>อยากมีเธออยู่ข้าง ๆ</h3>
+            <p>ขอให้เราได้สร้างความทรงจำดี ๆ ไปด้วยกันอีกเยอะ ๆ เลยนะ</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  /* ---------- เหตุผล ---------- */
-  var reasons=[
-    // "เพราะวันที่ไม่มีเธอคุยด้วย โลกหายไปทั้งใบ",
-    "เพราะเรื่องตลกที่คิดได้ อยากเล่าให้เธอฟังคนแรก",
-    "เพราะเสียงหัวเราะเธอ มันแพงกว่าศักดิ์ศรีของเราเยอะ",
-    "เพราะทะเลาะกับเธอ แพ้ก็ยังดีกว่าไม่มีเธอ",
-    "เพราะอาหารอร่อยแค่ไหน ถ้ากินคนเดียวก็จืด",
-    "เพราะเธอจำได้แม้แต่เรื่องที่เราลืม",
-    "เพราะเรายังไม่ได้พาเธอไปที่ที่เราอยากพาไปเลย",
-    "เพราะคนที่ทำให้เราอยากเป็นคนที่ดีขึ้น มีแค่เธอ"
-  ];
-  var pool=[], rBox=$("reason");
-  $("reasonBtn").addEventListener("click",function(ev){
-    if(!pool.length) pool=reasons.slice();
-    var k=Math.floor(Math.random()*pool.length);
-    rBox.style.opacity=0;
-    var msg=pool.splice(k,1)[0];
-    setTimeout(function(){ rBox.textContent=msg; rBox.style.transition="opacity .3s"; rBox.style.opacity=1; },160);
-    burstAt(ev.currentTarget,4);
-  });
+    <section class="letter-section" id="letter">
+      <div class="letter">
+        <p class="letter-top">ถึงเธอ,</p>
 
-  /* ---------- เอฟเฟกต์ ---------- */
-  function burstAt(el,n){
-    var r=el.getBoundingClientRect(), e=["💖","💕","🌸","✨","💗"];
-    for(var j=0;j<n;j++){
-      (function(j){setTimeout(function(){
-        var s=document.createElement("div");
-        s.className="burst";
-        s.textContent=e[Math.floor(Math.random()*e.length)];
-        s.style.left=(r.left+Math.random()*r.width)+"px";
-        s.style.top=(r.top+r.height/2)+"px";
-        document.body.appendChild(s);
-        setTimeout(function(){s.remove()},2500);
-      },j*70)})(j);
-    }
-  }
-  function petals(){
-    var e=["🌸","💮","🌷","💗"];
-    var p=document.createElement("div");
-    p.className="petal";
-    p.textContent=e[Math.floor(Math.random()*e.length)];
-    p.style.left=Math.random()*100+"vw";
-    p.style.fontSize=(14+Math.random()*16)+"px";
-    p.style.animationDuration=(7+Math.random()*6)+"s";
-    p.style.opacity=.5+Math.random()*.4;
-    document.body.appendChild(p);
-    setTimeout(function(){p.remove()},14000);
-  }
-  setInterval(petals, isCoarse?1400:800);
+        <!-- TODO: แก้เนื้อหาจดหมายนี้เป็นข้อความของคุณเอง -->
+        <div class="letter-content">
+          <p>
+            วันนี้เป็นอีกหนึ่งวันที่เราอยากบอกว่า
+            การมีเธออยู่ในชีวิตคือของขวัญที่มีค่ามากสำหรับเรา🎁
+          </p>
 
-  /* ---------- ยกโทษ ---------- */
-  $("forgive").addEventListener("click",function(){
-    $("finalCard").style.display="none";
-    $("result").classList.add("show");
-    $("result").scrollIntoView({behavior:"smooth",block:"center"});
-    var n=isCoarse?20:40, e=["💖","💕","💗","🌹","✨","🎉"];
-    for(var j=0;j<n;j++){
-      (function(j){setTimeout(function(){
-        var s=document.createElement("div");
-        s.className="burst";
-        s.textContent=e[Math.floor(Math.random()*e.length)];
-        s.style.left=Math.random()*window.innerWidth+"px";
-        s.style.top=(window.innerHeight-30)+"px";
-        document.body.appendChild(s);
-        setTimeout(function(){s.remove()},2500);
-      },j*80)})(j);
-    }
-    if(navigator.vibrate) navigator.vibrate([50,60,50,60,120]);
-  });
+          <p>
+            ขอบคุณสำหรับทุกความเข้าใจ ทุกกำลังใจ💗
+            ทุกเสียงหัวเราะ และทุกช่วงเวลาที่เราได้ใช้ร่วมกัน💗
+            ทุกคืนที่บอกฝันดี💗
+            ทุกครั้งที่โทรหากันและคุยกันจนดึกดื่น💗
+            ไม่ว่าจะเป็นวันที่สดใสหรือวันที่เหนื่อยล้า💗
+            เธอทำให้ทุกอย่างมีความหมายมากขึ้นเสมอ💗
+          </p>
 
-  $("restart").addEventListener("click",function(){
-    $("result").classList.remove("show");
-    $("finalCard").style.display="block";
-    window.scrollTo({top:0,behavior:"smooth"});
-    type();
-  });
+          <p>
+            เราอาจไม่ได้สมบูรณ์แบบ แต่เราสัญญาว่าจะตั้งใจรัก
+            ดูแล และอยู่ข้าง ๆ เธอให้ดีที่สุด จะปรับความเข้าใจกันมากขึ้น(แต่จะรักตัวเองเหมือนเดิมค้าบบสัญญา)❤️
+          </p>
 
-  type();
-})();
-</script>
+          <p class="final-message">
+            สุขสันต์วันครบรอบนะ🎉<br>
+            รักเธอมากที่สุดเลย 🎀💗
+          </p>
+        </div>
+
+        <!-- TODO: เปลี่ยนเป็นชื่อของคุณ -->
+        <p class="signature">จาก, หมาเด็กขี้อ้อน🐶</p>
+      </div>
+    </section>
+
+    <section class="surprise-section">
+      <p>ก่อนจะไป...</p>
+      <h2>มีอะไรอยากบอกเธออีกอย่าง</h2>
+      <button class="surprise-button" id="surpriseButton">
+        กดตรงนี้สิ ♡
+      </button>
+      <p class="surprise-message" id="surpriseMessage"></p>
+    </section>
+  </main>
+
+  <footer>
+    <!-- TODO: เปลี่ยนปีหรือข้อความท้ายเว็บได้ -->
+    <p>Made with love, just for you babe(Pamai)♥
+      Credit: First
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
