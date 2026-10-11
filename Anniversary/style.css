@@ -1,0 +1,376 @@
+:root {
+  --pink: #f47c9c;
+  --dark-pink: #df51c0;
+  --light-pink: #fff1f5;
+  --cream: #fffaf6;
+  --text: #4d3a40;
+  --muted: #806b72;
+  --white: #ffffff;
+  --shadow: 0 15px 40px rgba(190, 88, 119, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: "Kanit", sans-serif;
+  overflow-x: hidden;
+}
+
+.navbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 24px 28px;
+  position: relative;
+  z-index: 5;
+}
+
+.logo {
+  color: var(--dark-pink);
+  font-family: "Itim", cursive;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: var(--text);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--dark-pink);
+}
+
+.hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 192, 210, 0.55), transparent 27%),
+    radial-gradient(circle at 88% 25%, rgba(255, 213, 176, 0.6), transparent 25%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 680px;
+  padding: 80px 24px 110px;
+  position: relative;
+  text-align: center;
+}
+
+.eyebrow,
+.section-title > p {
+  color: var(--dark-pink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-family: "Itim", cursive;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 14px 0 22px;
+}
+
+.highlight {
+  color: var(--dark-pink);
+  display: block;
+}
+
+.hero-text {
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  max-width: 610px;
+}
+
+.anniversary-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(244, 124, 156, 0.25);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin: 32px 0;
+  padding: 18px 34px;
+}
+
+.anniversary-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.anniversary-card strong {
+  color: var(--dark-pink);
+  font-size: 2.2rem;
+  margin-right: 6px;
+}
+
+.anniversary-card span {
+  color: var(--muted);
+}
+
+.button,
+.surprise-button {
+  background: var(--dark-pink);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(223, 81, 121, 0.25);
+  color: var(--white);
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Kanit", sans-serif;
+  font-size: 1rem;
+  padding: 14px 29px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.button:hover,
+.surprise-button:hover {
+  background: #c93d65;
+  transform: translateY(-3px);
+}
+
+.memory-section {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 100px 28px;
+}
+
+.section-title {
+  margin: 0 auto 45px;
+  max-width: 650px;
+  text-align: center;
+}
+
+.section-title h2,
+.surprise-section h2 {
+  font-family: "Itim", cursive;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: 10px;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.memory-card {
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform 0.25s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-8px);
+}
+
+.memory-card img {
+  display: block;
+  height: 245px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.memory-content {
+  padding: 22px;
+}
+
+.memory-date {
+  color: var(--dark-pink);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.memory-content h3 {
+  font-family: "Itim", cursive;
+  font-size: 1.65rem;
+  font-weight: 400;
+  margin: 7px 0;
+}
+
+.memory-content p:last-child {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.letter-section {
+  background: var(--light-pink);
+  padding: 100px 28px;
+}
+
+.letter {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin: 0 auto;
+  max-width: 760px;
+  padding: clamp(35px, 8vw, 75px);
+  position: relative;
+}
+
+.letter::before {
+  color: rgba(244, 124, 156, 0.13);
+  content: "♥";
+  font-size: 11rem;
+  position: absolute;
+  right: 30px;
+  top: 5px;
+}
+
+.letter-top,
+.signature {
+  color: var(--dark-pink);
+  font-family: "Itim", cursive;
+  font-size: 1.7rem;
+  position: relative;
+}
+
+.letter-content {
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 2;
+  margin: 25px 0;
+  position: relative;
+}
+
+.letter-content p + p {
+  margin-top: 17px;
+}
+
+.final-message {
+  color: var(--dark-pink);
+  font-family: "Itim", cursive;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-top: 30px !important;
+}
+
+.signature {
+  text-align: right;
+}
+
+.surprise-section {
+  padding: 110px 28px;
+  text-align: center;
+}
+
+.surprise-section > p:first-child {
+  color: var(--dark-pink);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.surprise-button {
+  margin-top: 30px;
+}
+
+.surprise-message {
+  color: var(--dark-pink);
+  font-family: "Itim", cursive;
+  font-size: 1.65rem;
+  margin-top: 25px;
+  min-height: 42px;
+}
+
+footer {
+  background: #513d44;
+  color: #fcecf0;
+  padding: 25px;
+  text-align: center;
+}
+
+footer p {
+  font-family: "Itim", cursive;
+  font-size: 1.1rem;
+}
+
+.heart {
+  animation: floatUp linear forwards;
+  color: var(--pink);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotate(0deg);
+  }
+
+  15% {
+    opacity: 0.65;
+  }
+
+  85% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-105vh) rotate(360deg);
+  }
+}
+
+@media (max-width: 800px) {
+  .memory-grid {
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    max-width: 460px;
+  }
+
+  .memory-card img {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 18px 20px;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+
+  .anniversary-card {
+    padding: 15px 25px;
+  }
+
+  .memory-section,
+  .letter-section,
+  .surprise-section {
+    padding: 75px 20px;
+  }
+}
